@@ -1,0 +1,14 @@
+{% extends 'pages/post.html' %}
+{% block title %}Профиль{% endblock %}
+{% block content %}
+<div class="container", style="margin-top: 5rem;border-radius: 5px; background-color: white; margin-left: 30%; margin-right: 30%; width: 40%">
+	{% if request.user.is_authenticated %}
+		<p class="text-center", style="font-weight: 550;font-size: 140%">Здравствуйте, {{ user.first_name }} {{ user.last_name }}</p>
+		<p style="margin-left: 12.2%">Логин: {{ user.username }}</p>
+		<p style="margin-left: 12.2%">Почта: {{ user.email }}</p>
+		<a class="nav-link" href="{% url 'logout' %}" style="width: 5rem; border: 0px solid #000; display: block; margin-right: auto; margin-left: auto; border-radius: 10px; background-color:  #1f6f8b; color: white;">Выйти</a>
+	{% else %}
+		<h2 class="text-center">Войдите в аккаунт</h2>
+	{% endif %}
+</div>
+{% endblock %}

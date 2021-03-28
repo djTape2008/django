@@ -1,0 +1,22 @@
+{% extends 'pages/main.html' %}
+{% block title %}Категории{% endblock %}
+{% block content %}
+	<div class="container", style="margin-top: 4.2rem;">
+		{% for post in posts %}
+			{{ post.category }}
+			{% if post.category == "politics" %}
+				<div class="card", style="height: 100%;width: 70%;display: inline-block; border-radius: 5px; margin-top: 1rem; margin-left: 15%">
+					<div style="float:left; width: 74%; border: 0px solid #000; margin-left: 0.7rem; margin-top: 0.4rem">
+						<a href="{% url 'news_detail' post.category post.id %}" class="card_title1", style="">
+							<p>{{ post.title }}</p>
+						</a>
+					</div>
+					<div><a href="{% url 'news_detail' post.category post.id %}"><img class="" src="{{ post.image.url }}" alt="", style="width: 21%;float:right;border-radius: 5px; margin: 1rem"></a></div>
+					<div><p style="margin-left: 0.7rem; margin-bottom: -3rem;">{{ post.date }}</p></div>
+				</div>
+			{% else %}
+				1
+			{% endif %}
+		{% endfor %}
+	</div>	
+{% endblock %}

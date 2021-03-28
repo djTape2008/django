@@ -1,0 +1,23 @@
+{% extends 'pages/main.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Registration{% endblock %}
+{% block content %}
+	<style>
+		.login {
+			border: 1px solid #000;
+			margin-left: 30%;
+			margin-right: 30%;
+			margin-top: 5.2rem;
+			border-radius: 10px;
+			background-color: white;
+		}
+	</style>
+	<div class="login">
+		<h3 class="text-center" style="margin-top: 0.3rem;">Регистрация</h3>
+		<form class="auth_form" action="" method="POST" style="margin-left: 20%; margin-right: 20%;">
+			{% csrf_token %}
+			{{ form|crispy }}
+			<input type="submit" class="btn btn-success" value="Войти" style="display: block;margin-left: auto;margin-right: auto; margin-top: 0.5rem; margin-bottom: 0.5rem; width: 6rem">		
+		</form>
+	</div>
+{% endblock %}

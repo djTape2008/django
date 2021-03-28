@@ -1,0 +1,78 @@
+{% extends 'pages/main.html' %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+	<style>
+		.links {
+			margin-left: 8.3%;
+			border-radius: 5px;
+			background-color: white;
+			width: 17%;
+			height: 100%;
+			margin-top: 4.7rem;
+			text-decoration: none;
+		}
+		#cont2 {
+			height: 100%;
+			width: 50%;
+			display: inline-block;
+			border-radius: 5px;
+			margin-top: 1rem;
+			margin-left: 0.6%;
+		}
+		#h31 {
+			text-align: left;
+			margin-top: 0.4rem;
+			font-weight: 650;
+		}
+		.image_post {
+			margin-top: 0.8rem;
+		}
+		#p1 {
+			color: gray;
+			font-size: 80%;
+			margin-bottom: -0.2rem;
+		}
+		ul.hr {
+			margin: 0; /* Обнуляем значение отступов */
+			padding: 4px; /* Значение полей */
+			font-size: 120%;
+		}
+		ul.hr li {
+			display: inline;
+			margin-left: -0.5rem;
+			padding: 3px; /* Поля вокруг текста */
+		}
+		a {
+			text-decoration: none;
+			color: #1f6f8b;
+		}
+	</style>
+	<div class="row">
+		<div class="links">
+			<ul class="hr">
+				<li><a href="{% url 'all_category' %}">Category</a></li>
+				<li> /</li>
+				<li><a href="{% url 'category' post.category %}">{{ post.category }}</a></li>
+				<li> /</li>
+				<li><a href="#">{{ post.id }}</a></li>
+			</ul>
+		</div>
+		<div class="container" id="cont2" style="background-color: white; margin-top: 4.7rem;border-radius: 5px;">
+			<h2 id="h31">{{ post.title }}</h2>
+			<p id="p1">{{ post.date }}</p>
+			<div class="image_post"><a href="#"><img class="" src="{{ post.image.url }}" alt="", style="width: 100%;border-radius: 5px;"></a></div>
+			<p>{{ post.text_description|linebreaksbr }}</p>
+			<p>Комментарии ({{ post.comment_set.count }}) :</p>
+			<div class="form_leave_comment_sport">
+				<form class="comment_form" action="{% url 'leave_comment_sport' post.id %}" method="POST" style="">
+					{% csrf_token %}
+					<input type="text" class="" value="" style="">		
+					<button type="submit">Оставить комментарий</button>
+				</form>
+			</div>
+			{% for comment in post.comment_set.all %}
+				{{ comment.text }}
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

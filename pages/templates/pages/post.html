@@ -1,0 +1,99 @@
+{% extends 'pages/main.html' %}
+{% block content %}
+<link rel="stylesheet" href="https://bootstraptema.ru/snippets/slider/2016/flexslider/flexslider.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://bootstraptema.ru/snippets/slider/2016/flexslider/jquery.flexslider.js"></script>
+<script type="text/javascript" src="https://bootstraptema.ru/snippets/slider/2016/flexslider/modernizr.js"></script>
+<script type="text/javascript" src="https://bootstraptema.ru/snippets/slider/2016/flexslider/jquery.mousewheel.js"></script>
+
+	<style>
+		.links {
+			margin-left: auto;
+			border-radius: 5px;
+			background-color: white;
+			width: 13%;
+			height: 100%;
+			margin-top: 4.7rem;
+			text-decoration: none;
+			font-size: 9pt;
+		}
+		#cont2 {
+			width: 70%;
+			display: inline-block;
+			border-radius: 5px;
+			margin-top: 1rem;
+			margin-left: 0.6%;
+		}
+		#h31 {
+			text-align: left;
+			margin-top: 0.5rem;
+			font-weight: 650;
+		}
+		.image_post {
+			margin-top: 0.8rem;
+		}
+		#p1 {
+			color: gray;
+			font-size: 80%;
+			margin-top: -0.4rem;
+		}
+		ul.hr {
+			margin: 0; /* Обнуляем значение отступов */
+			padding: 4px; /* Значение полей */
+			font-size: 120%;
+		}
+		ul.hr li {
+			display: inline;
+			margin-left: -0.5rem;
+			padding: 3px; /* Поля вокруг текста */
+		}
+		a {
+			text-decoration: none;
+			color: #1f6f8b;
+		}
+
+		.post_body {
+			margin-top: -0.1rem;
+		}
+
+		.post_autor {
+			text-align: right;
+			color: #303032;
+			margin-top: -0.7rem;
+			margin-bottom: 0.5rem
+		}
+	</style>
+	{% if posts.count == 1 %}
+		{% for post in posts %}
+			{% if post.date < datetime %}
+				<div class="row">
+					<div class="links">
+						<ul class="hr">
+							<li><a href="{% url 'all_category' %}">Category</a></li>
+							<li> /</li>
+							<li><a href="{% url 'category' post.category %}">{{ post.category }}</a></li>
+							<li> /</li>
+							<li><a href="#">{{ post.id }}</a></li>
+						</ul>
+					</div>
+					<div class="container" id="cont2" style="background-color: white; margin-top: 4.7rem;border-radius: 5px;">
+						<h4 id="h31">{{ post.title }}</h4>
+						<p id="p1">{{ post.date }}</p>
+
+						<div class="post_body">
+							{{ post.body|safe }}
+							<hr style="color: white">
+							<div class='post_autor'>
+								<div style="float: left">&#128065;{{ post.view }}</div><em>"My company", {{ post.autor }}</em>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endif %}
+		{% endfor %}
+	{% else %}
+		<div style="margin-top: 4.7rem;border: 0px solid red; width: 36%; margin-right: auto; margin-left: auto; font-weight: 800; font-size: 233%">
+			<p style="color: #1f6f8b;">Такой записи не существует!</p>
+		</div>
+	{% endif %}
+{% endblock %}
